@@ -3,8 +3,6 @@ package connection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Conexao {
     public Connection getConnection(){    
@@ -23,19 +21,8 @@ public class Conexao {
             Class.forName(driver);
             return DriverManager.getConnection(url, usuario, senha);
         } 
-        catch(ClassNotFoundException | SQLException ex) {
+        catch(SQLException | ClassNotFoundException ex) {
             throw new RuntimeException("Erro de conexão", ex);
         }
-    }
-    
-    public static void main(String args[]){
-        Conexao conexao = new Conexao();
-        Connection con = conexao.getConnection();
-        try {
-            con.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("sua mae");
     }
 }
